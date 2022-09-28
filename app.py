@@ -1,5 +1,5 @@
 import os
-from flask import Flask, url_for, redirect, request, send_from_directory
+from flask import Flask, url_for, redirect, request, send_from_directory, render_template
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = "./upload"
@@ -43,6 +43,14 @@ def upload():
 @app.route("/redirect")
 def toredirect():
     return redirect(url_for('hello'))
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def exception_handler(error):
+    return render_template('500.html'), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
