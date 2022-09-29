@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+
+{% block title %}主頁{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block body %}
+{% if current_user.is_authenticated %}
+  Hi {{ current_user.id }}!
+{% endif %}
+{% endblock %}
+{% block script %}
+
+{% endblock %}

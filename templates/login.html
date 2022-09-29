@@ -6,33 +6,13 @@
 {% endblock %}
 {% block body %}
 <h1>login page</h1>
-username:<input type="text" id="username"></input>
-password:<input type="password" id="password"></input>
-<button type="submit" id="submit" onclick="submit()">提交</button>
+<form method=post action="/login">
+    username:<input type="text" id="username" name="username"></input>
+    password:<input type="password" id="password" name="password"></input>
+    <input value={{ request.args.get('next') }} type="hidden" name="next"></input>
+    <button type="submit">提交</button>
+</form>
 {% endblock %}
 {% block script %}
-<script>
-    function submit(){
-        const username = document.getElementById('username').value
-        const password = document.getElementById('password').value
-        if(username && password){
-            fetch('/login',{
-                method:'POST',
-                body:JSON.stringify({
-                    username: username,
-                    password: password
-                }),
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                }
-            })
-            .then(res=>{
-                return res.json()
-            })
-            .then(result=>{
-                console.log(result)   
-            })
-        }
-    }
-</script>
+
 {% endblock %}
